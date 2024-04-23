@@ -6,7 +6,7 @@ library(tidyverse)
 library(ggplot2)
 
 # Load data
-Data <-read.csv(sep = ';','C:/Users/alexa/Documents/Masterprojekt/Home-Office-Conflict-Data.csv')
+Data <-read.csv(sep = ';','XXX')
 Adata <- as.data.frame(Data)
 
 # Replace Gender Variables male with 1, female with 2, Prefer not to say with 3
