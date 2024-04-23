@@ -1,1 +1,35 @@
 #R-Code Masterproject 
+
+#Set up & loading packages
+library(tidyr)
+library(tidyverse)
+library(ggplot2)
+
+# Load data
+Data <-read.csv(sep = ';','C:/Users/alexa/Documents/Masterprojekt/Home-Office-Conflict-Data.csv')
+Adata <- as.data.frame(Data)
+
+# Replace Gender Variables male with 1, female with 2, Prefer not to say with 3
+Adata %>%
+  mutate(Gender = replace(Gender, Gender == "Male", 1)) %>%
+  mutate(Gender = replace(Gender, Gender == "Female", 2)) %>%
+  mutate(Gender = replace(Gender, Gender == "Prefer not to say", 3))
+view(Adata)
+
+# Replace What is your prefered choice Work from Home only with 1, 
+# Work from Office only with 2, 
+# Hybrid with 3, Okay with both of the options given above with 4
+Adata %>%
+  mutate(What.is.your.preferred.choice. = replace(What.is.your.preferred.choice., What.is.your.preferred.choice. == "Work from Home only", 1)) %>%
+  mutate(What.is.your.preferred.choice. = replace(What.is.your.preferred.choice., What.is.your.preferred.choice. == "Work from Office only", 2)) %>%
+  mutate(What.is.your.preferred.choice. = replace(What.is.your.preferred.choice., What.is.your.preferred.choice. == "Hybrid", 3)) %>%
+  mutate(What.is.your.preferred.choice. = replace(What.is.your.preferred.choice., What.is.your.preferred.choice. == "Okay with both of the options given above", 4))
+  view(Adata)
+  
+#Create Plot for relationship between Preferred choice and development of soft skills
+Plot_PrefDev <- ggplot(Adata, mapping = aes(What.is.your.preferred.choice., Do.you.think.work.from.home.gives.more.flexibility.to.develop.soft.skills.than.work.from.office..Answer.this.on.a.range.of.1.5))
+Plot_PrefDev + geom_bar(stat = "identity")
+
+#Create Plot for relationship between Preferred choice and years of working
+Plot_PrefDev <- ggplot(Adata, mapping = aes(What.is.your.preferred.choice., Work.Experience..in.Years.))
+Plot_PrefDev + geom_bar(stat = "identity")
